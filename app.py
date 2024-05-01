@@ -1,7 +1,7 @@
 import streamlit as st
 #import pastream
 import pandas as pd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 st.set_page_config(layout='wide', page_title='Players Analysis')
 
@@ -52,13 +52,7 @@ def player_details(player):
         st.metric('50s/100s', fifty_hundred)
 
 
-    fig, ax = plt.subplots()
-    ax.bar(strike_rates['Season'], strike_rates['strike_rate'])
-    ax.set_xlabel('Season')
-    ax.set_ylabel('Strike Rate')
-    ax.set_title('Strike Rate')
-    plt.xticks(rotation=45)
-    st.pyplot(fig)
+    st.write(strike_rates)
 
 st.sidebar.title('Player Analysis')
 selected = st.sidebar.selectbox('Select one', ['Overall Analysis', 'Player'])
