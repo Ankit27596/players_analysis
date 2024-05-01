@@ -51,7 +51,6 @@ def player_details(player):
     with cl4:
         st.metric('50s/100s', fifty_hundred)
 
-    st.write(strike_rates)
 
     fig, ax = plt.subplots()
     ax.bar(strike_rates['Season'], strike_rates['strike_rate'])
