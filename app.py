@@ -28,12 +28,18 @@ def player_details(player):
     season_wise_batsman_data = pd.merge(matches[['ID', 'Season']], legal_balls_faced, how='right', on='ID')
     strike_rates = season_wise_batsman_data.groupby('Season', as_index=False)['strike_rate'].mean().sort_values('Season')
 
-    as_bowler = data[data['bowler'] == player]
-    bowls = as_bowler.groupby('ID', as_index=False)['ballnumber'].max()
-    overs_bowled = int(round((bowls['ballnumber'].sum()/6*10).astype(int)/10, 0))
-    total_wickets = as_bowler['isWicketDelivery'].sum()
-    max_wickets = as_bowler.groupby('ID')['isWicketDelivery'].sum().sort_values(ascending=False).iloc[0]
+    try:
+        as_bowler = data[data['bowler'] == player]
+        bowls = as_bowler.groupby('ID', as_index=False)['ballnumber'].max()
+        overs_bowled = int(round((bowls['ballnumber'].sum()/6*10).astype(int)/10, 0))
+        total_wickets = as_bowler['isWicketDelivery'].sum()
+        max_wickets = as_bowler.groupby('ID')['isWicketDelivery'].sum().sort_values(ascending=False).iloc[0]
 
+    except:
+        overs_bowled = 0
+        total_wickets = 0
+        max_wickets = 0
+        
     cl1, cl2, cl3, cl4 = st.columns(4)
 
     with cl1:
